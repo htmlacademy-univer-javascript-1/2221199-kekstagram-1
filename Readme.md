@@ -1,11 +1,7 @@
 # Личный проект «Кекстаграм»
 
 * Студент: [Никита Золотухин](https://up.htmlacademy.ru/univer-js1/1/user/2221199).
-<<<<<<< Updated upstream
-* Наставник: [Павел Нюкало](https://htmlacademy.ru/profile/nyukalopavel)
-=======
 * Наставник: [Павел Нюкало](https://htmlacademy.ru/profile/nyukalopavel).
->>>>>>> Stashed changes
 
 ---
 
