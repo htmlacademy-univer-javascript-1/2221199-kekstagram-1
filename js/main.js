@@ -5,3 +5,6 @@ function getRandomInRange(start, end) {
 function checkStringLength (commentary, maxLength) {
   return commentary.length <= maxLength;
 }
+
+getRandomInRange(1, 100);
+checkStringLength('asd', 5);
