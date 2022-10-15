@@ -1,15 +1,9 @@
-const getRandomInRange = (start, end) => {
-  return start >= 0 && end >= start ? Math.round(Math.random() * (end - start)) + start : -1;
-}
+const getRandomInRange = (start, end) => start >= 0 && end >= start ? Math.round(Math.random() * (end - start)) + start : -1;
 
-const checkStringLength = (commentary, maxLength) => {
-  return commentary.length <= maxLength;
-}
+const getRandomArrayElement = (array) => array[getRandomInRange(0, array.length - 1)];
 
-const getRandomArrayElement = (array) => {
-  return array[getRandomInRange(0, array.length - 1)];
-}
+const checkStringLength = (commentary, maxLength) => commentary.length <= maxLength;
 
 checkStringLength('asd', 5);
 
-export {getRandomInRange, getRandomArrayElement, checkStringLength}
+export {getRandomInRange, getRandomArrayElement, checkStringLength};
