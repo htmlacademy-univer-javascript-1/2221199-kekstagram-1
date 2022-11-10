@@ -12,6 +12,6 @@ picturesData.forEach((pictureData) => {
   picture.querySelector('.picture__likes').textContent = pictureData.likes;
 
   pictureListFragment.appendChild(picture);
-})
+});
 
 pictureList.appendChild(pictureListFragment);
