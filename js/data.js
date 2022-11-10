@@ -1,7 +1,6 @@
 import {getRandomInRange, getRandomArrayElement} from './util.js';
 
 const PHOTOGRAPHIES_COUNT = 25;
-const COMMENTS_COUNT = 3;
 
 const NAMES = [
   'Артём',
@@ -45,14 +44,14 @@ const createComment = () => ({
 });
 
 let currentId = 0;
-const createPhotography = () => ({
+const createPicture = () => ({
   id: ++currentId,
   url: `photos/${currentId}.jpg`,
   description: getRandomArrayElement(DESCRIPTIONS),
   likes: getRandomInRange(15, 200),
-  comments: Array.from({length: COMMENTS_COUNT}, createComment),
+  comments: Array.from({length: getRandomInRange(0, 15)}, createComment),
 });
 
-const createPhotographies = () => Array.from({length: PHOTOGRAPHIES_COUNT}, createPhotography);
+const createPictures = () => Array.from({length: PHOTOGRAPHIES_COUNT}, createPicture);
 
-export {createPhotographies};
+export {createPictures};
