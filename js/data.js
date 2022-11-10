@@ -19,11 +19,11 @@ const DESCRIPTIONS = [
   'Крутышка!',
   'Не круто',
   'Крутяк',
-  'Отстой',
-  'норм бравлик',
   'бебрики',
-  'фуу',
   'ку челики чд кд',
+  'отдыхаю =))))',
+  'урфу норм уник',
+  'джаваскрипт люблю капец',
 ];
 
 const MESSAGES = [
@@ -49,7 +49,7 @@ const createPicture = () => ({
   url: `photos/${currentId}.jpg`,
   description: getRandomArrayElement(DESCRIPTIONS),
   likes: getRandomInRange(15, 200),
-  comments: Array.from({length: getRandomInRange(0, 15)}, createComment),
+  comments: Array.from({length: getRandomInRange(1, 5)}, createComment),
 });
 
 const createPictures = () => Array.from({length: PHOTOGRAPHIES_COUNT}, createPicture);
