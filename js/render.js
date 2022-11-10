@@ -1,5 +1,5 @@
 import {createPictures} from './data.js';
-import {addThumbnailClickHandler} from "./big-picture.js";
+import {addThumbnailClickHandler} from './big-picture.js';
 
 const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 const pictureList = document.querySelector('.pictures');
@@ -12,7 +12,7 @@ picturesData.forEach((pictureData) => {
   picture.querySelector('.picture__comments').textContent = pictureData.comments.length;
   picture.querySelector('.picture__likes').textContent = pictureData.likes;
 
-  addThumbnailClickHandler(picture, pictureData)
+  addThumbnailClickHandler(picture, pictureData);
   pictureListFragment.appendChild(picture);
 });
 
