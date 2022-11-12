@@ -4,6 +4,8 @@ const getRandomArrayElement = (array) => array[getRandomInRange(0, array.length 
 
 const checkStringLength = (commentary, maxLength) => commentary.length <= maxLength;
 
+const isEscapeKey = (evt) => evt.key === 'Escape';
+
 checkStringLength('asd', 5);
 
-export {getRandomInRange, getRandomArrayElement, checkStringLength};
+export {getRandomInRange, getRandomArrayElement, checkStringLength, isEscapeKey};
