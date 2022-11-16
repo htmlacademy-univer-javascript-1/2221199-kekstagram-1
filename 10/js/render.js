@@ -9,7 +9,7 @@ const picturesData = createPictures();
 picturesData.forEach((pictureData) => {
   const picture = pictureTemplate.cloneNode(true);
   picture.querySelector('.picture__img').src = pictureData.url;
-  picture.querySelector('.picture__comments').textContent = pictureData.comments.length;
+  picture.querySelector('.picture__comments').textContent = pictureData.comments.length.toString();
   picture.querySelector('.picture__likes').textContent = pictureData.likes;
 
   addThumbnailClickHandler(picture, pictureData);
