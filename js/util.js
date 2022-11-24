@@ -6,6 +6,19 @@ const checkStringLength = (commentary, maxLength) => commentary.length <= maxLen
 
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
-checkStringLength('asd', 5);
+const arrayContainsElement = (array, element) => array.indexOf(element) >= 0;
 
-export {getRandomInRange, getRandomArrayElement, checkStringLength, isEscapeKey};
+const anyElementIsDuplicated = (array) => {
+  const temp = array.slice();
+  const length = temp.length;
+  for (let i = 0; i < length; i++) {
+    const element = temp[0];
+    temp.splice(0, 1);
+    if (arrayContainsElement(temp, element)) {
+      return true;
+    }
+  }
+  return false;
+};
+
+export {getRandomInRange, getRandomArrayElement, checkStringLength, isEscapeKey, arrayContainsElement, anyElementIsDuplicated};
