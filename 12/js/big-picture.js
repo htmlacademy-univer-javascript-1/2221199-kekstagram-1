@@ -37,13 +37,15 @@ const openBigPicture = (pictureData) => {
 function loadMoreComments() {
   const commentsList = bigPicture.querySelector('.social__comments');
   const currentCommentsCount = commentsList.children.length;
-  const a = pictureComments.length > COMMENTS_PER_LOAD + currentCommentsCount ? COMMENTS_PER_LOAD + currentCommentsCount : pictureComments.length;
+  const commentsCountAfterAdding = pictureComments.length > COMMENTS_PER_LOAD + currentCommentsCount ?
+    COMMENTS_PER_LOAD + currentCommentsCount :
+    pictureComments.length;
   const commentsCount = bigPicture.querySelector('.social__comment-count');
   commentsCount.innerHTML = '';
   commentsCount.insertAdjacentHTML('beforeend', `
-    ${a} из <span className="comments-count">${pictureComments.length}</span> комментариев`);
+    ${commentsCountAfterAdding} из <span className="comments-count">${pictureComments.length}</span> комментариев`);
 
-  for (let i = currentCommentsCount; i < a; i++) {
+  for (let i = currentCommentsCount; i < commentsCountAfterAdding; i++) {
     commentsList.insertAdjacentHTML('beforeend', `
     <li class="social__comment">
         <img
