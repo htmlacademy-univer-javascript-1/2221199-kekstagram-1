@@ -1,6 +1,7 @@
 import {getRandomInRange, getRandomArrayElement} from './util.js';
 
 const PHOTOGRAPHIES_COUNT = 25;
+const MAX_COMMENT_COUNT = 27;
 
 const NAMES = [
   'Артём',
@@ -24,6 +25,7 @@ const DESCRIPTIONS = [
   'отдыхаю =))))',
   'урфу норм уник',
   'джаваскрипт люблю капец',
+  'заждался падж',
 ];
 
 const MESSAGES = [
@@ -49,7 +51,7 @@ const createPicture = () => ({
   url: `photos/${currentId}.jpg`,
   description: getRandomArrayElement(DESCRIPTIONS),
   likes: getRandomInRange(15, 200),
-  comments: Array.from({length: getRandomInRange(1, 5)}, createComment),
+  comments: Array.from({length: getRandomInRange(1, MAX_COMMENT_COUNT)}, createComment),
 });
 
 const createPictures = () => Array.from({length: PHOTOGRAPHIES_COUNT}, createPicture);
