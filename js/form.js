@@ -18,33 +18,32 @@ const pristine = new Pristine(uploadForm, {
 
 const validateHashtagsCount = (value) => value.split(' ').length <= MAX_HASHTAGS_COUNT;
 
-const validateHashtagFormat = (value) => {
-  if (value === '') {
-    return true;
-  }
-  else {
-    return value.split(' ').every((hashtag) => HASHTAG_REG.test(hashtag));
-  }
-};
+const validateHashtagFormat = (value) =>
+  (value === '')
+    ? true
+    : value.split(' ').every((hashtag) => HASHTAG_REG.test(hashtag));
 
 const validateDuplicateHashtag = (value) => !anyElementIsDuplicated(value.toLowerCase().split(' '));
 
 pristine.addValidator(
   hashtagsField,
-  validateHashtagsCount,
-  `Нельзя указать больше ${MAX_HASHTAGS_COUNT} хэш-тегов`
-);
-
-pristine.addValidator(
-  hashtagsField,
   validateHashtagFormat,
-  `Хэш-тэги должны быть вида #hashtag и разделены пробелами. Макс. длинна хэш-тега - ${MAX_HASHTAG_LENGTH}`
+  `Хэш-тэги должны быть вида #hashtag и разделены пробелами. Макс. длинна хэш-тега - ${MAX_HASHTAG_LENGTH}`,
+  3
 );
 
 pristine.addValidator(
   hashtagsField,
   validateDuplicateHashtag,
-  'Один и тот же хэш-тег не может быть использован дважды. Хэш-теги нечувствительны к регистру'
+  'Один и тот же хэш-тег не может быть использован дважды. Хэш-теги нечувствительны к регистру',
+  2
+);
+
+pristine.addValidator(
+  hashtagsField,
+  validateHashtagsCount,
+  `Нельзя указать больше ${MAX_HASHTAGS_COUNT} хэш-тегов`,
+  1
 );
 
 pristine.addValidator(
@@ -70,32 +69,3 @@ uploadForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
   }
 });
-
-// let hashtagErrorMessage;
-// function validateHashtags(value) {
-//   hashtagErrorMessage = '';
-//   const hashtags = value.toLowerCase().split(' ');
-//   if (hashtags.length > MAX_HASHTAGS_COUNT) {
-//     hashtagErrorMessage = `Нельзя указать больше ${MAX_HASHTAGS_COUNT} хэш-тегов`;
-//     return false;
-//   }
-//   hashtags.forEach((hashtag) => {
-//     if (!HASHTAG_REG.test(hashtag)) {
-//       if (hashtag[0] !== '#') {
-//         hashtagErrorMessage = 'Хэш-тег должен начинается с #';
-//         return false;
-//       }
-//       if (!checkStringLength(hashtag, MAX_HASHTAG_LENGTH)) {
-//         hashtagErrorMessage = `Максимальная длина одного хэш-тега - ${MAX_HASHTAG_LENGTH} символов, включая решётку`;
-//         return false;
-//       }
-//       hashtagErrorMessage = 'Хэш-тэг может состоять только из букв и цифр и не может состоять из одной решетки. Хэш-теги разделяются пробелами';
-//       return false;
-//     }
-//   });
-//   if (anyElementIsDuplicated(hashtags)) {
-//     hashtagErrorMessage = 'Один и тот же хэш-тег не может быть использован дважды. Хэш-теги нечувствительны к регистру';
-//     return false;
-//   }
-//   return true;
-// }

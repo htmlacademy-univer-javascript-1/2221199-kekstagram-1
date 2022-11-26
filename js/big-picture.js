@@ -5,6 +5,8 @@ const COMMENTS_PER_LOAD = 5;
 const bigPicture = document.querySelector('.big-picture');
 const bigPictureCloseButton = bigPicture.querySelector('.big-picture__cancel');
 const loadCommentsButton = bigPicture.querySelector('.social__comments-loader');
+const commentsList = bigPicture.querySelector('.social__comments');
+const commentsCount = bigPicture.querySelector('.social__comment-count');
 
 let pictureComments;
 
@@ -31,16 +33,18 @@ const openBigPicture = (pictureData) => {
   bigPicture.querySelector('.likes-count').textContent = pictureData.likes;
   bigPicture.querySelector('.social__caption').textContent = pictureData.description;
   bigPicture.querySelector('.social__comments').innerHTML = '';
+  loadCommentsButton.classList.remove('hidden');
   loadMoreComments(pictureComments);
 };
 
 function loadMoreComments() {
-  const commentsList = bigPicture.querySelector('.social__comments');
   const currentCommentsCount = commentsList.children.length;
-  const commentsCountAfterAdding = pictureComments.length > COMMENTS_PER_LOAD + currentCommentsCount ?
-    COMMENTS_PER_LOAD + currentCommentsCount :
-    pictureComments.length;
-  const commentsCount = bigPicture.querySelector('.social__comment-count');
+  const commentsCountAfterAdding = pictureComments.length > COMMENTS_PER_LOAD + currentCommentsCount
+    ? COMMENTS_PER_LOAD + currentCommentsCount
+    : pictureComments.length;
+  if (commentsCountAfterAdding === pictureComments.length) {
+    loadCommentsButton.classList.add('hidden');
+  }
   commentsCount.innerHTML = '';
   commentsCount.insertAdjacentHTML('beforeend', `
     ${commentsCountAfterAdding} из <span className="comments-count">${pictureComments.length}</span> комментариев`);
