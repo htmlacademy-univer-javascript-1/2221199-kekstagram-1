@@ -34,7 +34,7 @@ const openBigPicture = (pictureData) => {
   bigPicture.querySelector('.social__caption').textContent = pictureData.description;
   bigPicture.querySelector('.social__comments').innerHTML = '';
   loadCommentsButton.classList.remove('hidden');
-  loadMoreComments(pictureComments);
+  loadMoreComments();
 };
 
 function loadMoreComments() {

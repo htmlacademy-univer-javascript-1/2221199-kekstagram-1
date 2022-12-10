@@ -64,8 +64,24 @@ hashtagsField.addEventListener('keydown', (evt) => {
   }
 });
 
+const submitForm = (evt) => {
+  if (!pristine.validate()) {
+    evt.preventDefault();
+  }
+};
+
+const addSubmitButtonHandler = () => {
+  uploadForm.addEventListener('submit', submitForm);
+};
+
+const removeSubmitButtonHandler = () => {
+  uploadForm.removeEventListener('submit', submitForm);
+};
+
 uploadForm.addEventListener('submit', (evt) => {
   if (!pristine.validate()) {
     evt.preventDefault();
   }
 });
+
+export {addSubmitButtonHandler, removeSubmitButtonHandler};
