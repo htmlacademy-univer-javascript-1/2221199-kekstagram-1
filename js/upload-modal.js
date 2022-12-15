@@ -18,7 +18,7 @@ const bringToDefaults = () => {
   setSlider('none');
   hashtagsField.value = '';
   descriptionField.value = '';
-}
+};
 
 const closeUploadingModal = () => {
   uploadOverlay.classList.add('hidden');
@@ -61,7 +61,7 @@ const showAlert = (message) => {
   alertContainer.style.top = '0';
   alertContainer.style.right = '0';
   alertContainer.style.padding = '10px 3px';
-  alertContainer.style.margin = '0 auto'
+  alertContainer.style.margin = '0 auto';
   alertContainer.style.fontSize = '26px';
   alertContainer.style.textAlign = 'center';
   alertContainer.style.lineHeight = '30px';
@@ -72,7 +72,21 @@ const showAlert = (message) => {
   alertContainer.textContent = message;
 
   document.body.append(alertContainer);
-}
+};
+
+const closeSuccessUploadMessage = () => {
+  document.querySelector('.success').remove();
+  document.removeEventListener('keydown', onSuccessEscKeydown);
+  document.addEventListener('keydown', onModalEscKeydown);
+  document.removeEventListener('click', onSuccessOuterAreaClick);
+};
+
+const closeErrorUploadMessage = () => {
+  document.querySelector('.error').remove();
+  document.removeEventListener('keydown', onErrorEscKeydown);
+  document.addEventListener('keydown', onModalEscKeydown);
+  document.removeEventListener('click', onErrorOuterAreaClick);
+};
 
 const showSuccessUploadMessage = () => {
   const message = successMessageTemplate.cloneNode(true);
@@ -83,7 +97,7 @@ const showSuccessUploadMessage = () => {
   document.addEventListener('keydown', onSuccessEscKeydown);
   document.removeEventListener('keydown', onModalEscKeydown);
   document.addEventListener('click', onSuccessOuterAreaClick);
-}
+};
 
 const showErrorUploadMessage = () => {
   const message = errorMessageTemplate.cloneNode(true);
@@ -94,21 +108,7 @@ const showErrorUploadMessage = () => {
   document.addEventListener('keydown', onErrorEscKeydown);
   document.removeEventListener('keydown', onModalEscKeydown);
   document.addEventListener('click', onErrorOuterAreaClick);
-}
-
-const closeSuccessUploadMessage = () => {
-  document.querySelector('.success').remove();
-  document.removeEventListener('keydown', onSuccessEscKeydown);
-  document.addEventListener('keydown', onModalEscKeydown);
-  document.removeEventListener('click', onSuccessOuterAreaClick);
-}
-
-const closeErrorUploadMessage = () => {
-  document.querySelector('.error').remove();
-  document.removeEventListener('keydown', onErrorEscKeydown);
-  document.addEventListener('keydown', onModalEscKeydown);
-  document.removeEventListener('click', onErrorOuterAreaClick);
-}
+};
 
 function onSuccessEscKeydown(evt) {
   if (isEscapeKey(evt)) {
@@ -136,4 +136,4 @@ function onErrorOuterAreaClick(evt) {
   }
 }
 
-export {onModalEscKeydown, showAlert, showSuccessUploadMessage, showErrorUploadMessage}
+export {onModalEscKeydown, showAlert, showSuccessUploadMessage, showErrorUploadMessage};

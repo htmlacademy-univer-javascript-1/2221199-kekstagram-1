@@ -38,13 +38,13 @@ function getSliderEffectOptions(min, max, start, step) {
 }
 
 const setSlider = (filter) => {
-  // if (filter === 'none') {
-  //   slider.classList.add('hidden');
-  // } else {
-  //   slider.classList.remove('hidden');
-  // }
-
-  filter === 'none' ? slider.classList.add('hidden') : slider.classList.remove('hidden');
+  if (filter === 'none') {
+    slider.classList.add('hidden');
+  } else {
+    slider.classList.remove('hidden');
+  }
+  // На тернарку ругается линт
+  // filter === 'none' ? slider.classList.add('hidden') : slider.classList.remove('hidden');
 
   uploadedImg.classList.remove(`effects__preview--${currentFilter}`);
   currentFilter = filter;

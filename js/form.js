@@ -1,5 +1,5 @@
 import {isEscapeKey, checkStringLength, anyElementIsDuplicated} from './util.js';
-import {sendData} from "./api.js";
+import {sendData} from './api.js';
 
 const MAX_DESCRIPTION_LENGTH = 140;
 const MAX_HASHTAG_LENGTH = 20;
@@ -19,8 +19,8 @@ const pristine = new Pristine(uploadForm, {
 
 const validateHashtagsCount = (value) =>
   (value === '')
-  ? true
-  : value.split(' ').length <= MAX_HASHTAGS_COUNT;
+    ? true
+    : value.split(' ').length <= MAX_HASHTAGS_COUNT;
 
 const validateHashtagFormat = (value) =>
   (value === '')
@@ -29,8 +29,8 @@ const validateHashtagFormat = (value) =>
 
 const validateDuplicateHashtag = (value) =>
   (value === '')
-  ? true
-  : !anyElementIsDuplicated(value.toLowerCase().split(' '));
+    ? true
+    : !anyElementIsDuplicated(value.toLowerCase().split(' '));
 
 pristine.addValidator(
   hashtagsField,
@@ -97,7 +97,7 @@ const setUserFormSubmit = (onSuccess, onError) => {
           onError();
         },
         new FormData(uploadForm)
-      )
+      );
     }
   });
 };

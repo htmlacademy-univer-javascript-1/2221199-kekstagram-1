@@ -24,8 +24,7 @@ const increaseScale = () => {
   }
   currentScaleValue += SCALE_CHANGE_STEP;
   changeImageScale(currentScaleValue);
-  console.log(currentScaleValue);
-}
+};
 
 const decreaseScale = () => {
   let currentScaleValue = parseInt(scaleControlValue.value, 10);
@@ -34,8 +33,7 @@ const decreaseScale = () => {
   }
   currentScaleValue -= SCALE_CHANGE_STEP;
   changeImageScale(currentScaleValue);
-  console.log(currentScaleValue);
-}
+};
 
 const addZoomButtonsClickHandlers = () => {
   zoomOutButton.addEventListener('click', decreaseScale);

@@ -15,8 +15,7 @@ const fillThumbnails = (picturesData) => {
     pictureListFragment.appendChild(picture);
   });
   pictureList.appendChild(pictureListFragment);
-}
-
+};
 
 
 pictureList.addEventListener('click', (evt) => {
@@ -26,4 +25,4 @@ pictureList.addEventListener('click', (evt) => {
   }
 });
 
-export {fillThumbnails}
+export {fillThumbnails};

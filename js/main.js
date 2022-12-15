@@ -8,7 +8,7 @@ import {setUserFormSubmit} from './form.js';
 getData(
   (pictures) => {
     fillThumbnails(pictures);
-    },
+  },
   () => {
     showAlert('Не удалось загрузить данные. Перезагрузите страницу либо попробуйте позже, мы уже исправляем это!');
   });
@@ -20,4 +20,4 @@ setUserFormSubmit(
   () => {
     showErrorUploadMessage();
   }
-)
+);
