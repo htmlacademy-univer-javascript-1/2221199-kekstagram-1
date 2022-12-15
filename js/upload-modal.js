@@ -57,7 +57,7 @@ uploadFileInput.addEventListener('change', () => {
 
 const showAlert = (message) => {
   const alertContainer = document.createElement('div');
-  alertContainer.classList.add('load-error-message')
+  alertContainer.classList.add('load-error-message');
   alertContainer.style.zIndex = '100';
   alertContainer.style.width = '500px';
   alertContainer.style.position = 'absolute';
