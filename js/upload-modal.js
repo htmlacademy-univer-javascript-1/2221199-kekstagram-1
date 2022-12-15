@@ -14,6 +14,7 @@ const closeUploadingModal = () => {
   document.body.classList.remove('modal-open');
   modalCloseButton.removeEventListener('click', closeUploadingModal);
   document.removeEventListener('keydown', onModalEscKeydown);
+  uploadFileInput.value = '';
   removeSubmitButtonHandler();
   removeEffectsListClickHandler();
   removeZoomButtonsClickHandlers();

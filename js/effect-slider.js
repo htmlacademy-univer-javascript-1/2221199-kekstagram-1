@@ -1,10 +1,3 @@
-const getSliderEffectOptions = (min, max, start, step) => ({
-  range: {min, max},
-  start,
-  step,
-  connect: 'lower'
-});
-
 const SLIDER_EFFECT_OPTIONS = {
   'none': getSliderEffectOptions(0, 100, 100, 1),
   'chrome': getSliderEffectOptions(0, 1, 1, 0.1),
@@ -34,12 +27,25 @@ let currentFilter = 'none';
 
 noUiSlider.create(sliderElement, SLIDER_EFFECT_OPTIONS[currentFilter]);
 
+function getSliderEffectOptions(min, max, start, step) {
+  return {
+    range: {min, max},
+    start,
+    step,
+    connect: 'lower'
+  };
+
+}
+
 const setSlider = (filter) => {
-  if (filter === 'none') {
-    slider.classList.add('hidden');
-  } else {
-    slider.classList.remove('hidden');
-  }
+  // if (filter === 'none') {
+  //   slider.classList.add('hidden');
+  // } else {
+  //   slider.classList.remove('hidden');
+  // }
+
+  filter === 'none' ? slider.classList.add('hidden') : slider.classList.remove('hidden');
+
   uploadedImg.classList.remove(`effects__preview--${currentFilter}`);
   currentFilter = filter;
   uploadedImg.classList.add(`effects__preview--${currentFilter}`);

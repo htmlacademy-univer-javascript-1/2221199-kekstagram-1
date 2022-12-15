@@ -15,44 +15,34 @@ const changeImageScale = (scaleValue) => {
   scaleControlValue.value = `${scaleValue}%`;
 };
 
-const addZoomButtonsClickHandlers = () => {
-  zoomOutButton.addEventListener('click', () => {
-    let currentScaleValue = parseInt(scaleControlValue.value, 10);
-    if (currentScaleValue === MIN_SCALE_VALUE) {
-      return;
-    }
-    currentScaleValue -= SCALE_CHANGE_STEP;
-    changeImageScale(currentScaleValue);
-  });
+const increaseScale = () => {
+  let currentScaleValue = parseInt(scaleControlValue.value, 10);
+  if (currentScaleValue === MAX_SCALE_VALUE) {
+    return;
+  }
+  currentScaleValue += SCALE_CHANGE_STEP;
+  changeImageScale(currentScaleValue);
+  console.log(currentScaleValue);
+}
 
-  zoomInButton.addEventListener('click', () => {
-    let currentScaleValue = parseInt(scaleControlValue.value, 10);
-    if (currentScaleValue === MAX_SCALE_VALUE) {
-      return;
-    }
-    currentScaleValue += SCALE_CHANGE_STEP;
-    changeImageScale(currentScaleValue);
-  });
+const decreaseScale = () => {
+  let currentScaleValue = parseInt(scaleControlValue.value, 10);
+  if (currentScaleValue === MIN_SCALE_VALUE) {
+    return;
+  }
+  currentScaleValue -= SCALE_CHANGE_STEP;
+  changeImageScale(currentScaleValue);
+  console.log(currentScaleValue);
+}
+
+const addZoomButtonsClickHandlers = () => {
+  zoomOutButton.addEventListener('click', decreaseScale);
+  zoomInButton.addEventListener('click', increaseScale);
 };
 
 const removeZoomButtonsClickHandlers = () => {
-  zoomOutButton.removeEventListener('click', () => {
-    let currentScaleValue = parseInt(scaleControlValue.value, 10);
-    if (currentScaleValue === MIN_SCALE_VALUE) {
-      return;
-    }
-    currentScaleValue -= SCALE_CHANGE_STEP;
-    changeImageScale(currentScaleValue);
-  });
-
-  zoomInButton.removeEventListener('click', () => {
-    let currentScaleValue = parseInt(scaleControlValue.value, 10);
-    if (currentScaleValue === MAX_SCALE_VALUE) {
-      return;
-    }
-    currentScaleValue += SCALE_CHANGE_STEP;
-    changeImageScale(currentScaleValue);
-  });
+  zoomOutButton.removeEventListener('click', decreaseScale);
+  zoomInButton.removeEventListener('click', increaseScale);
 };
 
 export {changeImageScale, addZoomButtonsClickHandlers, removeZoomButtonsClickHandlers, DEFAULT_SCALE_VALUE};
