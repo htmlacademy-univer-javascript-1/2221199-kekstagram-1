@@ -1,4 +1,5 @@
 import {isEscapeKey, checkStringLength, anyElementIsDuplicated} from './util.js';
+import {sendData} from "./api.js";
 
 const MAX_DESCRIPTION_LENGTH = 140;
 const MAX_HASHTAG_LENGTH = 20;
@@ -16,14 +17,20 @@ const pristine = new Pristine(uploadForm, {
   errorTextClass: 'img-upload__field-wrapper__error-text',
 });
 
-const validateHashtagsCount = (value) => value.split(' ').length <= MAX_HASHTAGS_COUNT;
+const validateHashtagsCount = (value) =>
+  (value === '')
+  ? true
+  : value.split(' ').length <= MAX_HASHTAGS_COUNT;
 
 const validateHashtagFormat = (value) =>
   (value === '')
     ? true
     : value.split(' ').every((hashtag) => HASHTAG_REG.test(hashtag));
 
-const validateDuplicateHashtag = (value) => !anyElementIsDuplicated(value.toLowerCase().split(' '));
+const validateDuplicateHashtag = (value) =>
+  (value === '')
+  ? true
+  : !anyElementIsDuplicated(value.toLowerCase().split(' '));
 
 pristine.addValidator(
   hashtagsField,
@@ -78,10 +85,21 @@ const removeSubmitButtonHandler = () => {
   uploadForm.removeEventListener('submit', submitForm);
 };
 
-uploadForm.addEventListener('submit', (evt) => {
-  if (!pristine.validate()) {
+const setUserFormSubmit = (onSuccess, onError) => {
+  uploadForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
-  }
-});
+    if (pristine.validate()) {
+      sendData(
+        () => {
+          onSuccess();
+        },
+        () => {
+          onError();
+        },
+        new FormData(uploadForm)
+      )
+    }
+  });
+};
 
-export {addSubmitButtonHandler, removeSubmitButtonHandler};
+export {addSubmitButtonHandler, removeSubmitButtonHandler, setUserFormSubmit};

@@ -10,8 +10,10 @@ const zoomInButton = scaleControl.querySelector('.scale__control--bigger');
 const scaleControlValue = scaleControl.querySelector('.scale__control--value');
 const uploadedImg = uploadModal.querySelector('.img-upload__preview img');
 
+const convertToPercents = (value) => value / 100;
+
 const changeImageScale = (scaleValue) => {
-  uploadedImg.style.transform = `scale(${scaleValue / 100})`;
+  uploadedImg.style.transform = `scale(${convertToPercents(scaleValue)})`;
   scaleControlValue.value = `${scaleValue}%`;
 };
 
