@@ -18,6 +18,7 @@ const bringToDefaults = () => {
   setSlider('none');
   hashtagsField.value = '';
   descriptionField.value = '';
+  document.querySelector('#effect-none').checked = true;
 };
 
 const closeUploadingModal = () => {
@@ -29,6 +30,7 @@ const closeUploadingModal = () => {
   removeSubmitButtonHandler();
   removeEffectsListClickHandler();
   removeZoomButtonsClickHandlers();
+  document.querySelector('.load-error-message').classList.remove('hidden');
 };
 
 const openUploadingModal = () => {
@@ -40,6 +42,7 @@ const openUploadingModal = () => {
   addSubmitButtonHandler();
   addEffectsListClickHandler();
   addZoomButtonsClickHandlers();
+  document.querySelector('.load-error-message').classList.add('hidden');
 };
 
 function onModalEscKeydown(evt) {
@@ -54,6 +57,7 @@ uploadFileInput.addEventListener('change', () => {
 
 const showAlert = (message) => {
   const alertContainer = document.createElement('div');
+  alertContainer.classList.add('load-error-message');
   alertContainer.style.zIndex = '100';
   alertContainer.style.width = '500px';
   alertContainer.style.position = 'absolute';
