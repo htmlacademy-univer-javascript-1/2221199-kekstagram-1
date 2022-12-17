@@ -2,6 +2,7 @@ const SCALE_CHANGE_STEP = 25;
 const DEFAULT_SCALE_VALUE = 100;
 const MAX_SCALE_VALUE = 100;
 const MIN_SCALE_VALUE = 25;
+const PERCENTAGES_FOR_FRACTIONAL_PART = 100;
 
 const uploadModal = document.querySelector('.img-upload');
 const scaleControl = document.querySelector('.img-upload__scale');
@@ -10,10 +11,8 @@ const zoomInButton = scaleControl.querySelector('.scale__control--bigger');
 const scaleControlValue = scaleControl.querySelector('.scale__control--value');
 const uploadedImg = uploadModal.querySelector('.img-upload__preview img');
 
-const convertToPercents = (value) => value / 100;
-
 const changeImageScale = (scaleValue) => {
-  uploadedImg.style.transform = `scale(${convertToPercents(scaleValue)})`;
+  uploadedImg.style.transform = `scale(${scaleValue / PERCENTAGES_FOR_FRACTIONAL_PART})`;
   scaleControlValue.value = `${scaleValue}%`;
 };
 
