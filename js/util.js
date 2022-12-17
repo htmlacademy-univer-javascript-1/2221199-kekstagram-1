@@ -21,4 +21,5 @@ const anyElementIsDuplicated = (array) => {
   return false;
 };
 
-export {getRandomInRange, getRandomArrayElement, checkStringLength, isEscapeKey, arrayContainsElement, anyElementIsDuplicated};
+export {getRandomInRange, getRandomArrayElement, checkStringLength, isEscapeKey, arrayContainsElement,
+  anyElementIsDuplicated};
