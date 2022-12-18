@@ -2,23 +2,30 @@ import {isEscapeKey} from './util.js';
 import {changeImageScale, addZoomButtonsClickHandlers, removeZoomButtonsClickHandlers, DEFAULT_SCALE_VALUE} from './scale-control.js';
 import {addSubmitButtonHandler, removeSubmitButtonHandler} from './form.js';
 import {setSlider, addEffectsListClickHandler, removeEffectsListClickHandler} from './effect-slider.js';
+import {uploadUserPhoto} from './upload-image.js';
 import './form.js';
 
 const uploadModal = document.querySelector('.img-upload');
 const uploadFileInput = uploadModal.querySelector('#upload-file');
 const uploadOverlay = uploadModal.querySelector('.img-upload__overlay');
 const modalCloseButton = uploadModal.querySelector('#upload-cancel');
-const successMessageTemplate = document.querySelector('#success').content.querySelector('.success');
-const errorMessageTemplate = document.querySelector('#error').content.querySelector('.error');
 const descriptionField = uploadModal.querySelector('[name="description"]');
 const hashtagsField = uploadModal.querySelector('[name="hashtags"]');
+const noneEffect = uploadModal.querySelector('#effect-none');
 
 const bringToDefaults = () => {
   changeImageScale(DEFAULT_SCALE_VALUE);
   setSlider('none');
   hashtagsField.value = '';
   descriptionField.value = '';
-  document.querySelector('#effect-none').checked = true;
+  noneEffect.checked = true;
+};
+
+const toggleLoadErrorMessage = () => {
+  const loadErrorMessage = document.querySelector('.load-error-message');
+  if (loadErrorMessage) {
+    loadErrorMessage.classList.toggle('hidden');
+  }
 };
 
 const closeUploadingModal = () => {
@@ -30,7 +37,7 @@ const closeUploadingModal = () => {
   removeSubmitButtonHandler();
   removeEffectsListClickHandler();
   removeZoomButtonsClickHandlers();
-  document.querySelector('.load-error-message').classList.remove('hidden');
+  toggleLoadErrorMessage();
 };
 
 const openUploadingModal = () => {
@@ -42,7 +49,8 @@ const openUploadingModal = () => {
   addSubmitButtonHandler();
   addEffectsListClickHandler();
   addZoomButtonsClickHandlers();
-  document.querySelector('.load-error-message').classList.add('hidden');
+  uploadUserPhoto();
+  toggleLoadErrorMessage();
 };
 
 function onModalEscKeydown(evt) {
@@ -78,66 +86,4 @@ const showAlert = (message) => {
   document.body.append(alertContainer);
 };
 
-const closeSuccessUploadMessage = () => {
-  document.querySelector('.success').remove();
-  document.removeEventListener('keydown', onSuccessEscKeydown);
-  document.addEventListener('keydown', onModalEscKeydown);
-  document.removeEventListener('click', onSuccessOuterAreaClick);
-};
-
-const closeErrorUploadMessage = () => {
-  document.querySelector('.error').remove();
-  document.removeEventListener('keydown', onErrorEscKeydown);
-  document.addEventListener('keydown', onModalEscKeydown);
-  document.removeEventListener('click', onErrorOuterAreaClick);
-};
-
-const showSuccessUploadMessage = () => {
-  const message = successMessageTemplate.cloneNode(true);
-  message.style.zIndex = '10000';
-  document.body.append(message);
-  bringToDefaults();
-  document.querySelector('.success__button').addEventListener('click', closeSuccessUploadMessage);
-  document.addEventListener('keydown', onSuccessEscKeydown);
-  document.removeEventListener('keydown', onModalEscKeydown);
-  document.addEventListener('click', onSuccessOuterAreaClick);
-};
-
-const showErrorUploadMessage = () => {
-  const message = errorMessageTemplate.cloneNode(true);
-  message.style.zIndex = '10000';
-  document.body.append(message);
-  bringToDefaults();
-  document.querySelector('.error__button').addEventListener('click', closeErrorUploadMessage);
-  document.addEventListener('keydown', onErrorEscKeydown);
-  document.removeEventListener('keydown', onModalEscKeydown);
-  document.addEventListener('click', onErrorOuterAreaClick);
-};
-
-function onSuccessEscKeydown(evt) {
-  if (isEscapeKey(evt)) {
-    evt.preventDefault();
-    closeSuccessUploadMessage();
-  }
-}
-
-function onErrorEscKeydown(evt) {
-  if (isEscapeKey(evt)) {
-    evt.preventDefault();
-    closeErrorUploadMessage();
-  }
-}
-
-function onSuccessOuterAreaClick(evt) {
-  if (evt.target.closest('.success__inner') === null) {
-    closeSuccessUploadMessage();
-  }
-}
-
-function onErrorOuterAreaClick(evt) {
-  if (evt.target.closest('.error__inner') === null) {
-    closeErrorUploadMessage();
-  }
-}
-
-export {onModalEscKeydown, showAlert, showSuccessUploadMessage, showErrorUploadMessage};
+export {onModalEscKeydown, showAlert, bringToDefaults};

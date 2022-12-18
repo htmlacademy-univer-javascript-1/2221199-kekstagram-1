@@ -1,5 +1,6 @@
 import {isEscapeKey, checkStringLength, anyElementIsDuplicated} from './util.js';
 import {sendData} from './api.js';
+import {onModalEscKeydown, bringToDefaults} from './upload-modal.js';
 
 const MAX_DESCRIPTION_LENGTH = 140;
 const MAX_HASHTAG_LENGTH = 20;
@@ -102,4 +103,61 @@ const setUserFormSubmit = (onSuccess, onError) => {
   });
 };
 
-export {addSubmitButtonHandler, removeSubmitButtonHandler, setUserFormSubmit};
+const onSuccessEscKeydown = (evt) => {
+  if (isEscapeKey(evt)) {
+    evt.preventDefault();
+    closeSuccessUploadMessage();
+  }
+};
+
+const onErrorEscKeydown = (evt) => {
+  if (isEscapeKey(evt)) {
+    evt.preventDefault();
+    closeErrorUploadMessage();
+  }
+};
+
+const onSuccessOuterAreaClick = (evt) => {
+  if (evt.target.closest('.success__inner') === null) {
+    closeSuccessUploadMessage();
+  }
+};
+
+const onErrorOuterAreaClick = (evt) => {
+  if (evt.target.closest('.error__inner') === null) {
+    closeErrorUploadMessage();
+  }
+};
+
+function closeSuccessUploadMessage() {
+  document.querySelector('.success').remove();
+  document.removeEventListener('keydown', onSuccessEscKeydown);
+  document.addEventListener('keydown', onModalEscKeydown);
+  document.removeEventListener('click', onSuccessOuterAreaClick);
+}
+
+function closeErrorUploadMessage() {
+  document.querySelector('.error').remove();
+  document.removeEventListener('keydown', onErrorEscKeydown);
+  document.addEventListener('keydown', onModalEscKeydown);
+  document.removeEventListener('click', onErrorOuterAreaClick);
+}
+
+const showSummaryUploadMessage = (messageTemplate) => {
+  const message = messageTemplate.cloneNode(true);
+  message.style.zIndex = '10000';
+  document.body.append(message);
+  document.removeEventListener('keydown', onModalEscKeydown);
+  if (messageTemplate.classList.contains('success')) {
+    bringToDefaults();
+    document.querySelector('.success__button').addEventListener('click', closeSuccessUploadMessage);
+    document.addEventListener('keydown', onSuccessEscKeydown);
+    document.addEventListener('click', onSuccessOuterAreaClick);
+  } else if (messageTemplate.classList.contains('error')) {
+    document.querySelector('.error__button').addEventListener('click', closeErrorUploadMessage);
+    document.addEventListener('keydown', onErrorEscKeydown);
+    document.addEventListener('click', onErrorOuterAreaClick);
+  }
+};
+
+export {addSubmitButtonHandler, removeSubmitButtonHandler, setUserFormSubmit, showSummaryUploadMessage};

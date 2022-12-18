@@ -2,9 +2,12 @@ import './render-thumbnails.js';
 import './upload-modal.js';
 import {getData} from './api.js';
 import {fillThumbnails} from './render-thumbnails.js';
-import {showAlert, showSuccessUploadMessage, showErrorUploadMessage} from './upload-modal.js';
-import {setUserFormSubmit} from './form.js';
+import {showAlert} from './upload-modal.js';
+import {setUserFormSubmit, showSummaryUploadMessage} from './form.js';
 import {activateFilters} from './thumbnails-filters.js';
+
+const successMessageTemplate = document.querySelector('#success').content.querySelector('.success');
+const errorMessageTemplate = document.querySelector('#error').content.querySelector('.error');
 
 getData(
   (pictures) => {
@@ -17,9 +20,9 @@ getData(
 
 setUserFormSubmit(
   () => {
-    showSuccessUploadMessage();
+    showSummaryUploadMessage(successMessageTemplate);
   },
   () => {
-    showErrorUploadMessage();
+    showSummaryUploadMessage(errorMessageTemplate);
   }
 );

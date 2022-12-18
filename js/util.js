@@ -1,7 +1,5 @@
 const getRandomInRange = (start, end) => start >= 0 && end >= start ? Math.round(Math.random() * (end - start)) + start : -1;
 
-const getRandomArrayElement = (array) => array[getRandomInRange(0, array.length - 1)];
-
 const checkStringLength = (commentary, maxLength) => commentary.length <= maxLength;
 
 const isEscapeKey = (evt) => evt.key === 'Escape';
@@ -29,19 +27,4 @@ const debounce = (callback, timeoutDelay) => {
   };
 };
 
-const throttle = (callback, delayBetweenFrames) => {
-  let lastTime = 0;
-
-  return (...rest) => {
-    const now = new Date();
-    if (now - lastTime >= delayBetweenFrames) {
-      callback.apply(this, rest);
-      lastTime = now;
-    }
-  };
-};
-
-getRandomArrayElement([]);
-
-export {getRandomInRange, getRandomArrayElement, checkStringLength, isEscapeKey, arrayContainsElement,
-  anyElementIsDuplicated, debounce, throttle};
+export {getRandomInRange, checkStringLength, isEscapeKey, arrayContainsElement, anyElementIsDuplicated, debounce};

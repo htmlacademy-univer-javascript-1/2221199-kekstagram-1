@@ -34,7 +34,6 @@ function getSliderEffectOptions(min, max, start, step) {
     step,
     connect: 'lower'
   };
-
 }
 
 const setSlider = (filter) => {
