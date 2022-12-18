@@ -4,7 +4,15 @@ const pictureTemplate = document.querySelector('#picture').content.querySelector
 const pictureList = document.querySelector('.pictures');
 const pictureListFragment = document.createDocumentFragment();
 
+const clearOldThumbnails = () => {
+  const oldThumbnails = document.querySelectorAll('.pictures .picture');
+  oldThumbnails.forEach((oldThumbnail) => {
+    oldThumbnail.remove();
+  });
+};
+
 const fillThumbnails = (picturesData) => {
+  clearOldThumbnails();
   picturesData.forEach((pictureData) => {
     const picture = pictureTemplate.cloneNode(true);
     const pictureImg = picture.querySelector('.picture__img');
@@ -16,7 +24,6 @@ const fillThumbnails = (picturesData) => {
   });
   pictureList.appendChild(pictureListFragment);
 };
-
 
 pictureList.addEventListener('click', (evt) => {
   const target = evt.target;
