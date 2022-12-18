@@ -6,15 +6,15 @@ const RERENDER_DELAY = 500;
 const SORTING_VARIATIONS = {
   'filter-default':  (pictures) => pictures,
   'filter-random': (pictures) =>
-      pictures
-        .slice()
-        .sort(() => getRandomInRange(0, pictures.length) - getRandomInRange(0, pictures.length))
-        .slice(0, RANDOM_SORTED_THUMBNAILS_COUNT),
+    pictures
+      .slice()
+      .sort(() => getRandomInRange(0, pictures.length) - getRandomInRange(0, pictures.length))
+      .slice(0, RANDOM_SORTED_THUMBNAILS_COUNT),
   'filter-discussed': (pictures) =>
-      pictures
-        .slice()
-        .sort((pictureA, pictureB) => pictureB.comments.length - pictureA.comments.length),
-}
+    pictures
+      .slice()
+      .sort((pictureA, pictureB) => pictureB.comments.length - pictureA.comments.length),
+};
 
 const imgFilters = document.querySelector('.img-filters');
 
@@ -25,7 +25,7 @@ const onFiltersSortClick = (pictures) => (evt) => {
   if (target.closest('.img-filters__button') !== null) {
     fillThumbnails(SORTING_VARIATIONS[target.id](pictures));
   }
-}
+};
 
 const onFiltersActiveClick = (evt) => {
   const target = evt.target;
@@ -34,7 +34,7 @@ const onFiltersActiveClick = (evt) => {
     currentBtn = target;
     currentBtn.classList.add('img-filters__button--active');
   }
-}
+};
 
 const activateFilters = (pictures) => {
   imgFilters.classList.remove('img-filters--inactive');
