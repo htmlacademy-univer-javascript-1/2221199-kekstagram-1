@@ -21,5 +21,27 @@ const anyElementIsDuplicated = (array) => {
   return false;
 };
 
+const debounce = (callback, timeoutDelay) => {
+  let timeoutId;
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+};
+
+const throttle = (callback, delayBetweenFrames) => {
+  let lastTime = 0;
+
+  return (...rest) => {
+    const now = new Date();
+    if (now - lastTime >= delayBetweenFrames) {
+      callback.apply(this, rest);
+      lastTime = now;
+    }
+  };
+};
+
+getRandomArrayElement([]);
+
 export {getRandomInRange, getRandomArrayElement, checkStringLength, isEscapeKey, arrayContainsElement,
-  anyElementIsDuplicated};
+  anyElementIsDuplicated, debounce, throttle};
