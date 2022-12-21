@@ -2,7 +2,7 @@ import './render-thumbnails.js';
 import './upload-modal.js';
 import {getData} from './api.js';
 import {fillThumbnails} from './render-thumbnails.js';
-import {showAlert} from './upload-modal.js';
+import {showAlert, closeUploadingModal} from './upload-modal.js';
 import {setUserFormSubmit, showSummaryUploadMessage} from './form.js';
 import {activateFilters} from './thumbnails-filters.js';
 
@@ -21,6 +21,7 @@ getData(
 setUserFormSubmit(
   () => {
     showSummaryUploadMessage(successMessageTemplate);
+    closeUploadingModal();
   },
   () => {
     showSummaryUploadMessage(errorMessageTemplate);

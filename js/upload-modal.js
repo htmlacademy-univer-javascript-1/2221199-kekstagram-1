@@ -3,6 +3,7 @@ import {changeImageScale, addZoomButtonsClickHandlers, removeZoomButtonsClickHan
 import {addSubmitButtonHandler, removeSubmitButtonHandler} from './form.js';
 import {setSlider, addEffectsListClickHandler, removeEffectsListClickHandler} from './effect-slider.js';
 import {uploadUserPhoto} from './upload-image.js';
+import {addPictureListClickHandlers, removePictureListClickHandlers} from './render-thumbnails.js';
 import './form.js';
 
 const uploadModal = document.querySelector('.img-upload');
@@ -37,6 +38,7 @@ const closeUploadingModal = () => {
   removeSubmitButtonHandler();
   removeEffectsListClickHandler();
   removeZoomButtonsClickHandlers();
+  addPictureListClickHandlers();
   toggleLoadErrorMessage();
 };
 
@@ -49,6 +51,7 @@ const openUploadingModal = () => {
   addSubmitButtonHandler();
   addEffectsListClickHandler();
   addZoomButtonsClickHandlers();
+  removePictureListClickHandlers();
   uploadUserPhoto();
   toggleLoadErrorMessage();
 };
@@ -86,4 +89,4 @@ const showAlert = (message) => {
   document.body.append(alertContainer);
 };
 
-export {onModalEscKeydown, showAlert, bringToDefaults};
+export {onModalEscKeydown, showAlert, bringToDefaults, closeUploadingModal};
